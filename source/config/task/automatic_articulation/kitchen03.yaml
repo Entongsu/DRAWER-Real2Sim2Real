@@ -1,0 +1,143 @@
+params:
+  ArticulationObject:
+    kitchen:
+      name: kitche
+      path: "tools/auto_articulation/asset/uw_kitchen2/kitchen03.usda"
+      scale: [3.0, 3.0, 3.0]
+      pos: [0.1, -1.85, 0.70]
+      rot:
+        axis: [0, 1, 2]
+        angles: [-0.26, -0.04, 4.29]
+      disable_gravity: True
+      enabled_self_collisions: False
+      joints:
+        drawer_revolute_joint_0: 0.0
+        drawer_revolute_joint_1: 0.0
+        drawer_prismatic_joint_2: 0.0
+        drawer_prismatic_joint_3: 0.0
+        drawer_revolute_joint_4: 0.0
+        drawer_revolute_joint_5: -0.0
+        drawer_revolute_joint_6: 0.0
+        drawer_revolute_joint_7: -0.0
+        drawer_revolute_joint_8: -0.0
+        drawer_prismatic_joint_9: -0.0
+        drawer_prismatic_joint_10: -0.0
+        drawer_revolute_joint_11: -0.0
+        drawer_prismatic_joint_12: -0.0
+        drawer_revolute_joint_13: -0.0
+        drawer_prismatic_joint_14: -0.0
+        drawer_revolute_joint_15: -0.0
+        drawer_revolute_joint_16: -0.0
+        drawer_revolute_joint_17: -0.0
+        drawer_revolute_joint_18: -0.0
+        drawer_revolute_joint_19: -0.0
+        drawer_revolute_joint_20: -0.0
+        drawer_revolute_joint_21: -0.0
+
+      action_horiozon:
+        approach: 15
+        close: 5
+        open: 60
+        open_speed: 0.005
+        lift: 20
+        lift_speed: 0.015
+        close_speed: 0.015
+        close_cabinet: 30
+        close_descend: 5
+      target_drawer: drawer_12_handle
+      target_object: mug
+      robot_random_range:
+        drawer_12_handle:
+          pose_range:
+            x: [0.0, 0.0]
+            y: [-0.0, 0.0]
+            z: [0.20, 0.20]
+            yaw: [-0.0, 0.0]
+          joint_random_range:
+            position_range: [-0.01, 0.01]
+          offset: [-0.0, -0.0, -0.00]
+          delta_euler: [[2, 1], [0.5, -0.5]]
+          joint_name: drawer_prismatic_joint_12
+  RigidObject:
+    mug:
+      path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+      scale: [1, 1, 1]
+      pos: [0.50, -0.0, 0.45]
+      rot:
+        axis: [0]
+        angles: [-1.57]
+      pose_range:
+        x: [0.0, 0.10]
+        y: [-0.25, 0.05]
+        z: [0.0, 0.0]
+        yaw: [-1.0, 1.0]
+
+  Camera:
+    initial: False
+    random_pose: False
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: True
+    seg_pc: True
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      # camera_00:
+      #   camera_type: "tiled_camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: [0.2, -1.5, 1.0] #[1.60, -0.8, 1.2]
+      #   target: [0.40, -0.4, 0.60]
+      # camera_02:
+      #   camera_type: "tiled_camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: [0.0, 0.7, 1.0]
+      #   target: [0.40, -0.0, 0.60]
+
+      camera_03:
+        camera_type: "tiled_camera"
+        height: 480
+        width: 640
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        eyes: [0.0, -1.5, 0.8]
+        target: [0.55, -0.4, 0.40]
+
+      camera_01:
+        camera_type: "tiled_camera"
+        height: 480
+        width: 640
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        eyes: [-0.5, -0.8, 0.5]
+        target: [0.55, -0.4, 0.20]

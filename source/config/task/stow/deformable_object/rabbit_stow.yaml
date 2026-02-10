@@ -1,0 +1,40 @@
+params:
+  DeformableObject:
+    deform_object:
+      env_setting:
+        path: "source/assets/Plush/usd/rabbit/usd/rabbit_deform.usd"
+        camera_obs:
+          segmentation_id: 3
+          filter_xy_radius: 0.20
+          filter_z_threshold: 0.03
+          reset_pc_everytime: True
+        filter_pair_path:
+          [
+            "/World/envs/env_.*/gripper_0",
+            "/World/envs/env_.*/gripper_1",
+            "/World/envs/env_.*/deform_object/rabbit/Mesh/Mesh",
+          ]
+        scale: [1.0, 1.0, 1.0]
+        pos: [0.5, -0.0, 0.0]
+        pose_range:
+          x: [0.0, 0.10]
+          y: [-0.10, 0.10]
+          # z: [0.8, 0.8]
+          # roll: [-1.57, -1.57]
+          yaw: [-1.57, 1.57]
+          # pitch: [-3.14, 3.14]
+        velocity_range:
+        rot:
+          axis: [0]
+          angles: [1.57]
+
+        floating_gripper:
+          gripper_offset_xyz: [0.6, 0.0, 0.09]
+          gripper_offset: [0.0, 0.0, 0.08]
+
+        attach_robot:
+          DeformableVertexOverlapOffset: -0.02
+
+        physical_params:
+          fix_params:
+            dynamic_friction: 0.3

@@ -1,0 +1,185 @@
+params:
+  Task:
+    splat_list: ["kitchen", "robot", "eggplant"]
+    robot_splatting_path: source/assets/kitchen/usd/bridge_kitchen_uw/robot
+    inference_or_not: False
+    init_ee_pose: [0.3, -0.0, 0.20, 0.707, 0.0, 0.707, 0.0]
+  ArticulationObject:
+
+  robot:
+    gs_path: "source/assets/kitchen/usd/bridge_kitchen_uw/robot"
+
+  RigidObject:
+    eggplant:
+      path: "source/assets/kitchen/usd/bridge_kitchen_uw/eggplant/mesh.usd"
+      gs_path: "source/assets/kitchen/usd/bridge_kitchen_uw/eggplant/splat.ply"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.40, 0.10, 0.10]
+      rot:
+        axis: [0]
+        angles: [-0.0]
+      pose_range:
+        x: [-0.0, 0.08]
+        y: [0.0, 0.20] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-2.0, 2.0]
+    kitchen:
+      kinematic_enabled: True
+      path: "source/assets/kitchen/usd/bridge_kitchen_uw/sink02/sink02.usd"
+      gs_path: "source/assets/kitchen/usd/bridge_kitchen_uw/sink02/splat.ply"
+      scale: [1.2, 1.2, 1.2]
+      pos: [-0.4, 0.20, 1.1]
+      rot:
+        axis: [0, 2]
+        angles: [-1.57, 2.95]
+      pose_range:
+        x: [-0.0, 0.08]
+        y: [0.0, 0.20] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-2.0, 2.0]
+    # grape:
+    #   # kinematic_enabled: True
+    #   path: "source/assets/kitchen/usd/bridge_kitchen_uw/grape/grape.usd"
+    #   gs_path: "source/assets/kitchen/usd/bridge_kitchen_uw/grape/splat.ply"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.50, 0.40, 0.45]
+    #   rot:
+    #     axis: [0, 2]
+    #     angles: [-1.57, 1.57]
+    #   pose_range:
+    #     x: [-0.0, 0.08]
+    #     y: [0.0, 0.20] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+    #     yaw: [-2.0, 2.0]
+
+    wx250s_wrist_link:
+      spawn: False
+      path: robot/wx250s/wx250s_wrist_link
+
+    wx250s_gripper_link:
+      spawn: False
+      path: robot/wx250s/wx250s_gripper_link
+
+    wx250s_lower_forearm_link:
+      spawn: False
+      path: robot/wx250s/wx250s_lower_forearm_link
+
+    wx250s_left_finger_link:
+      spawn: False
+      path: robot/wx250s/wx250s_left_finger_link
+
+    wx250s_gripper_bar_link:
+      spawn: False
+      path: robot/wx250s/wx250s_gripper_bar_link
+
+    wx250s_upper_forearm_link:
+      spawn: False
+      path: robot/wx250s/wx250s_upper_forearm_link
+
+    wx250s_upper_arm_link:
+      spawn: False
+      path: robot/wx250s/wx250s_upper_arm_link
+
+    wx250s_right_finger_link:
+      spawn: False
+      path: robot/wx250s/wx250s_right_finger_link
+
+    wx250s_shoulder_link:
+      spawn: False
+      path: robot/wx250s/wx250s_shoulder_link
+
+    wx250s_base_link:
+      spawn: False
+      path: robot/wx250s/wx250s_base_link
+
+    wx250s_gripper_prop_link:
+      spawn: False
+      path: robot/wx250s/wx250s_gripper_prop_link
+
+  AssstObject:
+
+
+
+  GS_Camera:
+    initial: True
+    FoVx: 1.01 #1.01
+    FoVy: 0.7925
+    resolution: [640, 480]
+    zfar: 100.0
+    znear:  0.01
+    transform_camera2world: True
+
+    cameras:
+      camera_02:
+        translate: [0.40, -0.5, 1.0]
+        euler: [43, -10, 7]
+      # camera_01:
+      #   translate: [0.33, -0.42, 0.56]
+      #   euler: [38, 0, 0]
+
+  Camera:
+    initial: True
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: True
+    seg_pc: True
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      camera_01:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        eyes: null #[-0.2, 1.0, 0.8]
+        target: null #[0.40, -0.0, 0.5]
+        translate: [-0.40, 0.20, 1.1]
+        euler: [90, -10, 180]
+      # camera_02:
+      #   camera_type: "camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: null #[-0.2, 1.0, 0.8]
+      #   target: null #[0.40, -0.0, 0.5]
+      #   translate: [-0.10, -0.8, 1.3]
+      #   euler: [45.0, 0.0, -15]
+
+      # camera_03:
+      #   camera_type: "camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: null #[-0.2, 1.0, 0.8]
+      #   target: null #[0.40, -0.0, 0.5]
+      #   translate: [-0.60, 0.20, 1.7]
+      #   euler: [40.0, 0.0, -100]

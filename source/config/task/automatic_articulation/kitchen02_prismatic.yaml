@@ -1,0 +1,217 @@
+params:
+  Task:
+    seg_target_name: ["mug", "Robot"]
+    use_bounding_box: True
+    bbox_range: [-0.05, -0.05, 0.20, 0.65, 0.35, 10]
+    segment_handle: False
+    segment_handle_camera_id: 0
+    use_fps: True
+    aug_robot_mesh: False
+    target_object: mug
+    gripper_length_offset: [0.0, 0.0, -0.107, 1.0, 0.0, 0.0, 0.0]
+    randomize_camera_pose: False
+    randomize_camera_pose_range: [0.04, 0.1]
+    curobo_planner_length: 31
+    success_pick_threhold: 2
+
+    grasper:
+      isaac2m2t2_offset: [0.0, 0.0, 0.0, 0.707, 0.0, 0.0, -0.707]
+      gripper_offset: [0.0000, 0.0000, -0.10, 1.0, 0.0, 0.0, 0.0]
+      m2t2_gripper_offset: [0.0000, 0.0000, 0.02, 1.0, 0.0, 0.0, 0.0]
+      init_ee_pos: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0.0, 1.0]
+      grasp_angle_range: [-3.14, -3.0]
+      planner_tolerance_iter: 100
+      lift_threshold: 0.05
+      approach_horizon: 20
+      close_horizon: 7
+      lift_horizon: 15
+      lift_speed: [-0.0, 0.0, 0.015]
+    placement:
+      placement_offset: [0.15, 0.0, 0.20, 0.0, 1.0, 0.0, 0.0]
+      open_gripper_horizon: 15
+
+    cabinet_open:
+      planner_offset: [0.0, 0.0, -0.16, 1.0, 0.0, 0.0, 0.0]
+      open_offset: 0.20
+      approach: 20
+      close: 7
+      open: 30
+      open_speed: 0.008
+    cabinet_close:
+      planner_offset: [0.0, 0.0, -0.16, 1.0, 0.0, 0.0, 0.0]
+      cabinet_open_offset: [0.05, 0.0, 0.30, 0.0, 1.0, 0.0, 0.0]
+      cabinet_close_offset: [-0.10, 0.0, 0.15, 0.0, 1.0, 0.0, 0.0]
+      init_ee_pos: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0.0]
+      close_offset: 0.05
+      close_speed: 0.03
+      close_cabinet: 20
+      close_descend: 5
+      close_descend_speed: 0.01
+
+  ArticulationObject:
+    kitchen:
+      name: kitchen
+      path: "tools/auto_articulation/asset/uw_kitchen/kitchen.usda"
+      scale: [3.5, 3.74, 3.87]
+      pos: [0.18, 0.80, 0.43]
+      rot:
+        axis: [0, 1, 2]
+        angles: [-0.145, -0.078, -2.11]
+      disable_gravity: True
+      enabled_self_collisions: False
+      joints:
+        drawer_revolute_joint_2: 0.0
+        drawer_revolute_joint_3: 0.0
+        # drawer_revolute_joint_4: 0.0
+        # drawer_revolute_joint_5: 0.0
+        # drawer_revolute_joint_6: 0.0
+        # drawer_revolute_joint_7: -0.0
+        # drawer_revolute_joint_8: 0.0
+        # drawer_revolute_joint_9: -0.0
+        # drawer_revolute_joint_10: -0.0
+        # drawer_revolute_joint_11: -0.0
+        # drawer_revolute_joint_12: 0.0
+        # drawer_revolute_joint_13: -0.0
+
+        #revolute_joint
+        drawer_prismatic_joint_0: 0.0
+        drawer_prismatic_joint_1: 0.0
+      target_drawer: drawer_00_handle
+      target_joint_type: prismatic #prismatic revolute
+      target_object: mug
+      robot_random_range:
+        drawer_00_handle:
+          pose_range:
+            x: [-0.0, 0.0] #[-0.075, 0.075] #[-0.10, 0.10]
+            y: [-0.0, -0.0] #[-0.10, 0.02]
+            z: [0.0, 0.0] #[-0.02, 0.13]
+            yaw: [0.0, 0.0]
+
+          ee_pos_random_range:
+            position_range: [0.0, 0.0]
+          joint_random_range:
+            position_range: [-0.06, 0.06]
+
+          offset: [0.01, -0.0, 0.0]
+          delta_euler: [[2, 1], [0.5, -0.02]]
+          joint_name: drawer_prismatic_joint_0
+
+        drawer_02_handle:
+          pose_range:
+            x: [-0.15, -0.05]
+            y: [0.5, 0.6] #[-0.10, 0.02]
+            z: [-0.03, 0.03] #[-0.02, 0.13]
+            yaw: [-0.0, -0.0]
+
+          ee_pos_random_range:
+            position_range: [0.03, 0.3]
+          joint_random_range:
+            position_range: [-0.0, 0.0]
+
+          offset: [0.03, -0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.32]
+          delta_euler: [[2, 1], [0.5, -0.02]]
+          joint_name: drawer_revolute_joint_2
+      random_camera: True
+
+  RigidObject:
+    mug:
+      path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.51, -0.40, 0.17]
+      rot:
+        axis: [0]
+        angles: [-1.57]
+      pose_range:
+        x: [-0.0, 0.08]
+        y: [0.0, 0.20] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-2.0, 2.0]
+    # mug:
+    #   path: "source/assets/ycb/Axis_Aligned/010_potted_meat_can.usd"
+    #   scale: [1, 1, 1]
+    #   pos: [0.49, -0.40, 0.45]
+    #   rot:
+    #     axis: [0]
+    #     angles: [-1.57]
+    #   pose_range:
+    #     x: [0.0, 0.05]
+    #     y: [0.00, 0.30]
+    #     z: [0.0, 0.0]
+    #     yaw: [-2.0, 2.0]
+
+  Camera:
+    initial: True
+    random_pose: False
+    camera_json: "source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: True
+    seg_pc: True
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      # camera_00:
+      #   camera_type: "tiled_camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: [-0.20, -1.0, 0.7] #[0.60, -0.8, 1.2]
+      #   target: [0.20, -0.0, 0.5] #[0.55, -0.51924, 0.22789]
+
+      camera_01:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        eyes: null #[-0.2, 1.0, 0.8]
+        target: null #[0.40, -0.0, 0.5]
+        translate: [-0.26, 0.60, 0.80]
+        euler: [70.0, 0.0, -148]
+      # camera_02:
+      #   camera_type: "camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: null #[-0.2, 1.0, 0.8]
+      #   target: null #[0.40, -0.0, 0.5]
+      #   translate: [1.1, -0.20, 0.85]
+      #   euler: [60.0, 0.0, 95]
+      
+      # camera_03:
+      #   camera_type: "camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: null #[-0.2, 1.0, 0.8]
+      #   target: null #[0.40, -0.0, 0.5]
+      #   translate: [-0.16, 0.0, 1.46]
+      #   euler: [28.0, 0.0, -112]

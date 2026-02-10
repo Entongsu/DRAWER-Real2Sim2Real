@@ -1,0 +1,18 @@
+params:
+  General:
+    episode_length_s: 8.0
+
+  Robot:
+    init: True
+    robot_setting:
+      motion_type:
+        {
+          "push":
+            {
+              "vel": [0.03, 0.0, 0.0],
+              "init_pose": [0.4, 0.0, 0.01, 0.0, 1.0, 0.0, 0.0],
+              "end_frame": 22,
+              "static_frame": 7,
+              "random_orientation_rang": [0.0, 0.0],
+            },
+        }

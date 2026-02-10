@@ -1,0 +1,77 @@
+params:
+  ArticulationObject:
+    kitchen:
+      name: kitchen01
+      path: "tools/auto_articulation/asset/uiuc_kitchen02/kitchen.usda"
+      scale: [2, 2, 2]
+      pos: [0.0, -0.2, 0.8]
+      rot:
+        axis: [0, 1, 2]
+        angles: [-0.025, 0.21, -0.23]
+      disable_gravity: True
+      enabled_self_collisions: False
+      joints:
+        drawer_revolute_joint_0: 0.0
+        drawer_revolute_joint_1: 0.0
+        drawer_revolute_joint_2: 0.0
+        drawer_revolute_joint_3: 0.0
+        drawer_revolute_joint_4: 0.0
+        drawer_revolute_joint_5: -0.0
+        drawer_revolute_joint_6: 0.0
+        
+        drawer_revolute_joint_11: 0.0
+        drawer_revolute_joint_12: 0.0
+        drawer_revolute_joint_13: 0.0
+        drawer_revolute_joint_14: 0.0
+        drawer_revolute_joint_15: -0.0
+        
+        #revolute_joint
+        drawer_prismatic_joint_7: -0.0
+        drawer_prismatic_joint_8: 0.0
+        drawer_prismatic_joint_9: 0.0
+        drawer_prismatic_joint_10: 0.0
+        
+      action_horiozon:
+        approach: 15
+        close: 5
+        open: 60
+        open_speed: 0.005
+        lift: 20
+        lift_speed: 0.015
+        close_speed: 0.015
+        close_cabinet: 30
+        close_descend: 5
+      target_drawer: drawer_08_handle
+      target_object: mug
+      robot_random_range:
+        drawer_08_handle:
+          pose_range:
+            x: [-0.1, 0.0]
+            y: [-0.3, 0.0]
+            z: [-0.05, 0.15]
+            yaw: [-0.5, 0.5]
+          joint_random_range:
+            position_range: [-0.0, 0.0]
+          offset: [0.02, -0.0, 0.02]
+          
+          delta_euler: [[2, 1], [0.5, -0.02]]
+          joint_name: drawer_prismatic_joint_8
+        
+
+  RigidObject:
+    mug:
+      path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+      scale: [1, 1, 1]
+      pos: [0.50, -0.0, 0.35]
+      rot:
+        axis: [0]
+        angles: [-1.57]
+      pose_range:
+        x: [0.0, 0.10]
+        y: [-0.25, 0.05]
+        z: [0.0, 0.0]
+        yaw: [-1.0, 1.0]
+
+  Camera:
+    initial: False
+    random_pose: False

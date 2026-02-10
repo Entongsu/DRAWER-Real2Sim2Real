@@ -1,0 +1,206 @@
+params:
+  Task:
+    robot_type: franka_robotiq
+    splat_list: ["robot", "kitchen","bottle","plate"]
+    robot_splatting_path: source/assets/kitchen/usd/bridge_kitchen_uw/robot
+    inference_or_not: True
+    init_ee_pose: [0.36, -0.0, 0.60, 0.0, 1.0, 0.0, 0.0]
+    target_lift_object_pos: [0.35, 0.05, 0.25]
+    render_camera: True
+    reset_object_names: ["bottle"]
+    horizon: 200
+    reset_horizon: 20
+    lift_height: 0.15
+    action_range: [1.0, 3.14]
+    target_object: bottle
+    target_mesh_name: "Cube"
+    target_object_type: "none"
+
+    grasper:
+      isaac2m2t2_offset: [0.0, 0.0, 0.0, 0.707, 0.0, 0.0, -0.707]
+      gripper_offset: [-0.0, -0.0, -0.10, 1.0, 0.0, 0.0, 0.0]
+      m2t2_gripper_offset: [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      init_ee_pos: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0., 1.0]
+      grasp_angle_range: [-3.14, -3.0]
+      planner_tolerance_iter: 100
+      lift_threshold: 0.05
+      approach_horizon: 5
+      close_horizon: 5
+      lift_horizon: 20
+      lift_speed: [-0.0, 0.0, 0.02]
+    placement:
+      placement_offset: [0.15, 0.0, 0.20, 0.0, 1.0, 0.0, 0.0]
+      open_gripper_horizon: 20
+      placement_height: [0.20, 0.30]
+      placement_object: plate
+
+  RL_Train:
+    initial: True
+    rigid_object_names: ["bottle"]
+
+  ArticulationObject:
+  robot:
+    gs_path: "source/assets/robot/droid_uw_robot"
+    type: panda
+
+  RigidObject:
+    bottle:
+      # kinematic_enabled: True
+      path: "source/assets/gs_objects/bottle/bottle.usd"
+      gs_path: "source/assets/gs_objects/bottle/splat.ply"
+      # transformation_txt: "source/assets/gs_objects/bottle/transform.txt"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.458523, 0.      , 0.353477]
+      quat: [0.9805775 , -0.15159535,  0.05569447, -0.11128696]
+      pose_range:
+        x: [-0.04, 0.04]
+        y: [-0.04, 0.04] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-1.5, 1.5]
+
+    
+    plate:
+      path: "source/assets/gs_objects/plate/transformed_mesh.usd"
+      gs_path: "source/assets/gs_objects/plate/transformed_splat.ply"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.4, 0.25, 0.20]
+      rot:
+        axis: [0]
+        angles: [0]
+      pose_range:
+        x: [-0.0, 0.10]
+        y: [0.20, 0.25] #[0.0, 0.20]
+        z: [0.0, 0.0]
+
+    kitchen:
+      kinematic_enabled: True
+      path: "source/assets/kitchen/usd/droid_uw/cut_mesh.usd"
+      gs_path: "source/assets/kitchen/usd/droid_uw/splat.ply"
+      #transformation_txt: "source/assets/kitchen/usd/bridge_kitchen_uw/sink01/transform.txt"
+      scale: [1.28, 1.28, 1.28]
+      # pos: [0.50, 1.75,-0.06]
+      pos: [0.50, 2.2, -0.08]
+
+      # quat: [0.06483, -0.68304, 0.72747, 0.0]
+      quat: [0.0867, -0.6763, 0.7315, -0.0072]
+      pose_range:
+        x: [-0.0, 0.08]
+        y: [0.0, 0.20] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-2.0, 2.0]
+    
+    panda_link0:
+      spawn: False
+      path: robot/panda/panda_link0
+    panda_link1:
+      spawn: False
+      path: robot/panda/panda_link1
+    panda_link2:
+      spawn: False
+      path: robot/panda/panda_link2
+    panda_link3:
+      spawn: False
+      path: robot/panda/panda_link3
+    panda_link4:
+      spawn: False
+      path: robot/panda/panda_link4
+    panda_link5:
+      spawn: False
+      path: robot/panda/panda_link5
+    panda_link6:
+      spawn: False
+      path: robot/panda/panda_link6
+    panda_link7:
+      spawn: False
+      path: robot/panda/panda_link7
+    panda_link8:
+      spawn: False
+      path: robot/panda/panda_link8
+    base_link:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/base_link
+    left_outer_knuckle:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/left_outer_knuckle
+    left_outer_finger:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/left_outer_finger
+    left_inner_finger:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/left_inner_finger
+    left_inner_knuckle:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/left_inner_knuckle
+    right_outer_knuckle:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/right_outer_knuckle
+    right_outer_finger:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/right_outer_finger
+    right_inner_finger:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/right_inner_finger
+    right_inner_knuckle:
+      spawn: False
+      path: robot/panda/Robotiq_2F_85/Robotiq_2F_85/right_inner_knuckle
+
+  AssstObject:
+
+  GS_Camera:
+    initial: True
+    FoVx: 1.01 #1.01
+    FoVy: 0.8
+    resolution: [640, 480]
+    zfar: 100.0
+    znear: 0.01
+    transform_camera2world: True
+
+    cameras:
+      camera_03:
+        translate: [-0.01, 0.41, 0.76]
+        euler: [52, 0, -130]
+
+  Camera:
+    initial: False
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: True
+    seg_pc: True
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      camera_01:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        converter: "world"
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        translate: [-0.36, 0.70, 0.8]
+        euler: [54, 0, -123]
+
+    

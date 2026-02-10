@@ -1,0 +1,35 @@
+params:
+  DeformableObject:
+    deform_object:
+      env_setting:
+        path: "source/assets/Plush/usd/carrot/carrot_deform.usd"
+        filter_pair_path:
+          [
+            "/World/envs/env_.*/gripper",
+            "/World/envs/env_.*/deform_object/carrot/Mesh/Mesh",
+          ]
+        scale: [2.0, 2.0, 2.0]
+        pos: [0.50, -0.0, 0.01]
+        pose_range:
+          # x: [-0.10, 0.10]
+          # y: [-0.05, 0.05]
+          # z: [0.8, 0.8]
+          # roll: [-1.7, -1.2]
+          # yaw: [-0.77, 0.77]
+        velocity_range:
+        rot:
+          axis: [2]
+          angles: [1.57]
+
+        floating_gripper:
+          gripper_offset_xyz: [0.5, 0.0, 0.09]
+          gripper_offset: 0.04
+          random_position_dir: [[0.0, 0.0, 0.013]]
+
+        camera_obs:
+          segmentation_id: 3
+          filter_xy_radius: 0.10
+          filter_z_threshold: 0.03
+
+        attach_robot:
+          DeformableVertexOverlapOffset: 0.0

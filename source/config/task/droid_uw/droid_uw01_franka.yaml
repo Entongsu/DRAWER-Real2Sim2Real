@@ -1,0 +1,254 @@
+params:
+  Task:
+    robot_type: franka
+    splat_list: ["robot", "kitchen"]
+    robot_splatting_path: source/assets/kitchen/usd/bridge_kitchen_uw/robot
+    inference_or_not: True
+    init_ee_pose: [0.50, 0.0, 0.35, 0.0, 1.0, 0.0, 0., 1.0]
+    target_lift_object_pos: [0.35, 0.05, 0.25]
+    render_camera: True
+    reset_object_names: ["yellow_cube", "blue_cube"]
+    horizon: 180
+    reset_horizon: 20
+    lift_height: 0.15
+    action_range: [1.0, 1.0, 2.0, 3.14, 3.14, 3.14, 1.0]
+    target_object: yellow_cube
+    target_mesh_name: "Cube"
+    target_object_type: "cube"
+    success_condition:
+      bbox_region: [0.03, 0.03, 0.30]
+
+    grasper:
+      isaac2m2t2_offset: [0.0, 0.0, 0.0, 0.707, 0.0, 0.0, -0.707]
+      gripper_offset: [-0.0, -0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      m2t2_gripper_offset: [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      init_ee_pos: [0.50, 0.0, 0.35, 0.0, 1.0, 0.0, 0., 1.0]
+      grasp_angle_range: [-3.14, -3.0]
+      planner_tolerance_iter: 100
+      lift_threshold: 0.10
+      approach_horizon: 5
+      close_horizon: 5
+      lift_horizon: 0
+      lift_speed: [-0.0, 0.0, 0.02]
+
+    placement:
+      placement_offset: [0.15, 0.0, 0.20, 0.0, 1.0, 0.0, 0.0]
+      open_gripper_horizon: 20
+      placement_height: [0.13, 0.18]
+      placement_object: blue_cube
+      # placement_region:
+      #   min: [0.45, 0.25, 0.35]
+      #   max: [0.55, 0.35, 0.45]
+      #   bound_region: [0.40, 0.10, -0.10]
+
+  RL_Train:
+    initial: True
+    rigid_object_names: ["yellow_cube"]
+
+  ArticulationObject:
+  robot:
+    gs_path: "source/assets/robot/droid_uw_robot"
+    type: panda
+
+  RigidObject:
+    # mug:
+    #   path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+    #   scale: [0.01, 0.01, 0.01]
+    #   pos: [0.45, 0.05, 0.10]
+    #   rot:
+    #     axis: [0]
+    #     angles: [-1.57]
+    #   pose_range:
+    #     x: [-0.0, 0.1]
+    #     y: [-0.0, 0.15] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+    #     yaw: [-1.5, 1.5]
+
+    # plate:
+    #   path: "source/assets/gs_objects/plate/transformed_mesh.usd"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.5, 0.10, 0.0]
+    #   rot:
+    #     axis: [0]
+    #     angles: [0]
+    #   pose_range:
+    #     x: [-0.10, 0.05]
+    #     y: [0.0, 0.15] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+
+    blue_cube:
+      path: "source/assets/blocks/blue_block.usd"
+      scale: [0.025, 0.025, 0.025]
+      pos: [0.45, 0.0, 0.05]
+      rot:
+        axis: [0]
+        angles: [0]
+      pose_range:
+        x: [-0.0, 0.1]
+        y: [-0.15, 0.15] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-1.5, 1.5]
+
+    # yellow_cube:
+    #   path: "source/assets/blocks/yellow_block.usd"
+    #   scale: [0.025, 0.025, 0.025]
+    #   pos: [0.45, -0.0, 0.05]
+    #   rot:
+    #     axis: [0]
+    #     angles: [0]
+    #   pose_range:
+    #     x: [-0.0, 0.15]
+    #     y: [-0.15, 0.15] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+    #     yaw: [-1.5, 1.5]
+
+    yellow_cube:
+      path: source/assets/yunchu/cup02/cup02.usd
+      # path: source/assets/ycb/Axis_Aligned/025_mug.usd
+      scale: [1, 1, 1]
+      pos: [0.5, 0.0, -0.0]
+      rot:
+        axis: [0]
+        angles: [1.57]
+      pose_range:
+        x: [-0.03, 0.05]
+        y: [-0.10, 0.10]
+        z: [0.0, 0.0]
+        yaw: [-0.6, 0.6]
+    
+
+    # kitchen:
+    #   kinematic_enabled: True
+    #   path: "source/assets/kitchen/usd/droid_uw/cut_mesh.usd"
+    #   gs_path: "source/assets/kitchen/usd/droid_uw/splat.ply"
+    #   #transformation_txt: "source/assets/kitchen/usd/bridge_kitchen_uw/sink01/transform.txt"
+    #   scale: [1.28, 1.28, 1.28]
+    #   # pos: [0.50, 1.75,-0.06]
+    #   pos: [0.50, 2.2, -0.08]
+
+    #   # quat: [0.06483, -0.68304, 0.72747, 0.0]
+    #   quat: [0.0867, -0.6763, 0.7315, -0.0072]
+    #   pose_range:
+    #     x: [-0.0, 0.08]
+    #     y: [0.0, 0.20] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+    #     yaw: [-2.0, 2.0]
+
+    # panda_link0:
+    #   spawn: False
+    #   path: robot/panda/panda_link0
+    # panda_link1:
+    #   spawn: False
+    #   path: robot/panda/panda_link1
+    # panda_link2:
+    #   spawn: False
+    #   path: robot/panda/panda_link2
+    # panda_link3:
+    #   spawn: False
+    #   path: robot/panda/panda_link3
+    # panda_link4:
+    #   spawn: False
+    #   path: robot/panda/panda_link4
+    # panda_link5:
+    #   spawn: False
+    #   path: robot/panda/panda_link5
+    # panda_link6:
+    #   spawn: False
+    #   path: robot/panda/panda_link6
+    # panda_link7:
+    #   spawn: False
+    #   path: robot/panda/panda_link7
+    panda_hand:
+      spawn: False
+      path: Robot/panda_hand
+
+    panda_leftfinger:
+      spawn: False
+      path: Robot/panda_leftfinger
+
+    panda_rightfinger:
+      spawn: False
+      path: Robot/panda_rightfinger
+
+  AssstObject:
+
+  GS_Camera:
+    initial: False
+    FoVx: 1.01 #1.01
+    FoVy: 0.8
+    resolution: [640, 480]
+    zfar: 100.0
+    znear: 0.01
+    transform_camera2world: True
+
+    cameras:
+      camera_03:
+        translate: [-0.01, 0.41, 0.76]
+        euler: [52, 0, -130]
+
+  Camera:
+    initial: False
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: False
+    seg_pc: False
+    whole_rgb: True
+    seg_rgb: False
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      camera_01:
+        camera_type: "camera"
+        height: 224
+        width: 224
+        # converter: None #"world"
+        data_types: ["rgb"]
+        update_period: 0.03
+        translate: [-0.42062710689034993, 1.1138997795833088, 1.072004027698964]
+        # quat: [0.63, 0.04, 0.69, 0.36]
+        euler: [53.796837, -1.4000574e-13, -140.58081]
+
+      camera_02:
+        prim_path: "Robot/panda_hand/wrist_cam01"
+        camera_type: "camera"
+        height: 224
+        width: 224
+        data_types:
+          ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        translate: [0.025, 0.0, 0.0]
+        quat: [0.707, 0.0, 0.0, 0.707]
+        # euler: [45.0, 0.0, -15]
+
+      # camera_03:
+      #   camera_type: "camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: null #[-0.2, 1.0, 0.8]
+      #   target: null #[0.40, -0.0, 0.5]
+      #   translate: [-0.60, 0.20, 1.7]
+      #   euler: [40.0, 0.0, -100]

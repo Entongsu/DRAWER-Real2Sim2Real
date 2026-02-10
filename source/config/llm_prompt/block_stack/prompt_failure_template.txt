@@ -1,0 +1,17 @@
+Task:
+{{language_instruction}}
+
+Failure Reason:
+{{failure_reasoning}}
+
+Previous Failure Reasoning:
+{{previous_failure_reasoning}}
+
+Previous LLM Feedback:
+{{previous_llm_feedback}}
+
+
+You need to complete the code based on the provided task and failure reasoning. 
+rpy_grasp_offset: Represents the rotational offset applied to the grasp pose around the yaw axis. Ensure that the range of `rpy_grasp_offset` values remains between 0.7 and 1.6 or between -1.6 and 0.7 for optimal performance. If any dimension (roll, pitch, or yaw) does not require an offset, set that dimension to zero while applying the offset only to the required dimension.
+
+xyz_grasp_offset: Represents the positional (x, y, z) offset applied to the grasp pose. Ensure that the range of `xyz_grasp_offset` values remains between 0.0 and 0.04 or between -0.04 and 0.0 for optimal performance. If any dimension (x, y, or z) does not require an offset, set that dimension to zero while applying the offset only to the required dimension.

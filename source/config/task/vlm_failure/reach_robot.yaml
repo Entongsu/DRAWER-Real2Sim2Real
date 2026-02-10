@@ -1,0 +1,150 @@
+params:
+  Task:
+    horizon: 30
+    init_ee_pose: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0.0, 1.0]
+    position_range:
+      # [0.10, 0.2]
+      [[0.65, 0.3, 0.5, 0.0, 0.0, 3.14], [0.25, -0.3, 0.10, -0.0, -0.0, -3.14]]
+    rigid_object_names:
+      [
+        "panda_leftfinger",
+        "panda_rightfinger",
+        "panda_link0",
+        "panda_link1",
+        "panda_link2",
+        "panda_link3",
+        "panda_link4",
+        "panda_link5",
+        "panda_link6",
+        "panda_link7",
+        "panda_hand",
+      ]
+
+  ArticulationObject:
+
+  RigidObject:
+    panda_link0:
+      spawn: False
+      path: Robot/panda_link0
+    panda_link1:
+      spawn: False
+      path: Robot/panda_link1
+    panda_link2:
+      spawn: False
+      path: Robot/panda_link2
+    panda_link3:
+      spawn: False
+      path: Robot/panda_link3
+    panda_link4:
+      spawn: False
+      path: Robot/panda_link4
+    panda_link5:
+      spawn: False
+      path: Robot/panda_link5
+    panda_link6:
+      spawn: False
+      path: Robot/panda_link6
+    panda_link7:
+      spawn: False
+      path: Robot/panda_link7
+    panda_hand:
+      spawn: False
+      path:  Robot/panda_hand
+
+    panda_leftfinger:
+      spawn: False
+      path:  Robot/panda_leftfinger
+
+    panda_rightfinger:
+      spawn: False
+      path: Robot/panda_rightfinger
+
+  AssstObject:
+    # block1:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, -3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [1.57]
+    # block2:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, 3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [-1.57]
+    # block3:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [-4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+    # block4:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+
+  Camera:
+    initial: False
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_id_segmentation_fast"
+    whole_pc: False
+    seg_pc: False
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      camera_00:
+        camera_type: "camera"
+        height: 225
+        width: 225
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+
+        translate: [1.2, 0, 0.90]
+        euler: [68, 0.0, 88]
+
+      camera_01:
+        camera_type: "camera"
+        height: 225
+        width: 225
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+        translate: [0.25, 0.8, 0.80]
+        euler: [68.0, 0.0, 180]
+
+      camera_03:
+        camera_type: "camera"
+        height: 225
+        width: 225
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+        translate: [0.25, -0.8, 0.90]
+        euler: [60, 0.0, 0]

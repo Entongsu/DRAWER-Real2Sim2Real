@@ -1,0 +1,9 @@
+Task:
+"In the scene, you will find the following objects: yellow_cube, red_cube, blue_cube, green_cube, orange_cube, purple_cube, pink_cube, brown_cube, black_cube, white_cube, cyan_cube, magenta_cube, lime_cube, navy_cube, gray_cube, maroon_cube, teal_cube, lavender_cube, gold_cube, silver_cube 
+Your task is to pick up the lime_cube and place it onto the purple_cube."
+
+Failure Reason:
+"You picked up the teal_cube and placed it onto the gold_cube."
+
+
+Your need to complete the code based on the task and Failure reasoning mentioned above

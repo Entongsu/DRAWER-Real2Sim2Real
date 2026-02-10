@@ -1,0 +1,3 @@
+[submodule "submitit-tools"]
+	path = submitit-tools
+	url = git@github.com:WEIRDLabUW/submitit-tools.git

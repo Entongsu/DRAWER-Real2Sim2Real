@@ -1,0 +1,29 @@
+Camera:
+  initial: True
+  random_pose: True
+
+  pointcloud_setting:
+    use_segmentation: True
+    segmentation_point_cloud_id: 3
+    num_sampled_points: 2048
+    segmentation_point_cloud: True
+    colorize_point_cloud: True
+    num_downsampled_points: 2048
+
+  random_pose_setting:
+    origin: [0.5, -0.0, 0.0]
+    radius_range: [0.8, 1.2]
+    base_rot:
+      axis: [1, 0]
+      angles: [-1.57, -1.57]
+    z_min: 0.7
+
+  cameras:
+    camera:
+      camera_type: "tiled_camera"
+      height: 960
+      width: 1280
+      data_types: ["rgb", "distance_to_camera", "instance_segmentation_fast"]
+      update_period: 0.03
+      eyes: [1.8, 0.0, 0.7]
+      target: [0.5, -0.0, 0.0]

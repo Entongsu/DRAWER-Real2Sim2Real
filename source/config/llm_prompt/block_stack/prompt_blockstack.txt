@@ -1,0 +1,168 @@
+
+Objective:
+
+    You are tasked with generating a Python function named gen_plan to process a given task description and an error scenario. The function should determine the correct objects to interact with and whether to use a high-level or low-level policy. It should also generate feedback addressing the failure.
+
+Function Requirements:
+
+    The function should have the following signature:
+        def gen_plan(self, last_obs=None):
+
+    You need to fill in the following variables:
+        new_pickup_object_name: The object to be picked up.
+        new_placement_object_name: The object to place onto.
+        high_level_policy: Boolean indicating whether a high-level policy is active.
+        low_level_policy: Boolean indicating whether a low-level policy is active.
+        xyz_grasp_offset: The offset on the xyz grasp pose
+        xyz_placement_offset: The offset on the xyz placement pose
+        rpy_grasp_offset: Represents the rotational offset applied to the grasp pose around the yaw axis.
+        self.llm_feedback: The LLM feedback should be high level and low level 
+   
+
+Constraints:
+    For new_pickup_object_name and new_placement_object_name:
+        The object names must be present in the language_instruction (task description).
+        The function must return the correct pickup and placement object names as specified in the task description.
+    For xyz_grasp_offset and xyz_placement_offset,rpy_grasp_offset:
+        Offset Applicability: These offsets are only used when there is a low-level failure.
+        Single-Dimension Failure: If the failure is limited to some dimension (e.g., x, y, or z), the offsets for the other dimensions must be zero.
+            Example: For an x-dimension failure, the offset might be [non_zero_value, 0, 0].
+        For low-level corrections, you may need to refer to the previously generated correction feedback to iteratively replan. Each time a correction fails, you must regenerate a new compensation value based on the previous attempt, ensuring it adjusts incrementally while still referencing the original offset as the baseline.
+
+    For high_level_policy and low_level_policy:
+        Both variables can only have values of True or False.
+            At any given time:
+                Exactly one of them should be True.
+                Exactly one of them should be False.
+    For self.llm_feedback:
+        - High-Level Failure:
+            - The feedback should clearly indicate the correct objects to pick and place: f"It is a high-level failure, you should pick up the {new_pickup_object_name} and place onto {new_placement_object_name}."
+
+        - Low-Level Failure Feedback:
+            - The feedback must clearly specify the axis and direction of the offset for either the grasp or place pose, depending on the failure scenario.
+            - Example Feedback Format: "The robot failed to grasp the object due to the +z offset and correct by compensating the offset on grasp [0,0,0],[0.1,0.1,0.01]"
+        - Replacement Logic:
+            - Replace +z with:
+                - The appropriate axis: x, y, or z/roll,pitch,yaw.
+                - The correct direction: Direction: Use the same direction (+ or -) as specified in the failure reasoning.
+                - The context: Use "grasp" if the failure occurred during grasping or "place" if it occurred during placement.
+                - Compensation Offset: Provide a numerical list indicating the offset correction. 
+                    For example: 
+                        For a positive z offset(-z), the compensation offset might be positive value, such as [0,0,-0,positive_value].
+                        For a positive x offset(+x), the compensation offset might be positive value, such as [positive_value,-0,-0.0].
+                        For a negative y offset(-y), the compensation offset might be negative value, such as [0,0,negative_value,-0.0]
+                        For a negative yaw offset(-yaw), the compensation offset might be negative value, such as [0,0,negative_value,-0.0]
+
+
+The feedback should follow this format:
+If the failure is high level:
+
+"It is a high level failure, you should pick up the {new_pickup_object_name} and place onto {new_placement_object_name}"
+
+If the failure is low level:
+"It is a low level failure, there is some offset on the +x axis"
+
+---
+
+Guidelines:
+
+1. Determine the Failure Type:
+   - High-Level Failure: Occurs when incorrect objects are picked or placed.
+   - Low-Level Failure: Involves minor positional errors, such as offsets in x, y, or z.
+
+2. Correct Object Names:
+   - Use new_pickup_object_name and new_placement_object_name based on:
+     - Task Description: Identify the correct target object (to pick up) and placement object (to place onto).
+     - Reason for Failure: Replace incorrect objects with the correct ones from the task description.
+
+3. Function Implementation:
+   - If high_level_policy is True:
+     - Replace new_pickup_object_name and new_placement_object_name with the correct objects derived from the task description.
+   - If low_level_policy is True:
+     - Use corrections like xyz_grasp_offset([x, y, z]) or xyz_placement_offset([x, y, z]) to handle positional adjustments.
+
+4. Feedback Generation:
+   - Generate feedback that clearly specifies the correction using the updated new_pickup_object_name and new_placement_object_name.
+
+
+5: Replanning Multiple Times
+    In cases where replanning is required multiple times, follow these steps:
+        - Sequential Failure Reasoning(Previous Failure Reasoning):
+            -Store each failure reasoning message in a list, maintaining a sequential record of the reasons for past failures. This helps track the progression of errors across replanning attempts.
+        - LLM Feedback Buffer(Previous LLM Feedback):
+            -Save all LLM feedback responses in a dedicated buffer. This ensures that previous feedback is preserved and can be referenced during subsequent replanning attempts.
+        - Decision-Making Based on Previous Failure Reasoning and LLM Feedback
+            - If the latest LLM feedback suggests a +x offset with a value of [0.04, 0, 0], and the most recent failure reasoning identifies a -x offset, this indicates that the previous adjustment of [0.04, 0, 0] was too large. Consequently, the correction should involve an adjustment in the +x direction with a magnitude smaller than 0.04.
+            - However, for the Failure Reason, it still represents the original offset. This means that the adjustment value should consistently remain positive or negative, depending on the original offset's direction, to ensure proper correction.
+
+6. Randomization:
+    - For xyz_grasp_offset and xyz_placement_offset, ensure the offset values are randomly sampled within the following ranges based on the direction of the offset:
+        
+    - For rpy_grasp_offset, ensure the offset values are randomly sampled within the following ranges based on the direction of the offset:
+        
+    - Avoid sticking to fixed values, as the randomness allows for dynamic and flexible adjustments to better handle varying error scenarios. This approach ensures the offsets are adaptive and contextually responsive.
+    - Important Note: Ensure that each randomization step generates a unique value, and the randomization must follow a uniform distribution. Avoid repeating the same value across iterations to maintain diversity and ensure fair sampling within the specified range. This approach guarantees variability and uniformity, improving the effectiveness of replanning and corrections.
+7. Return Requirements:
+    - The function must adhere to the following return constraints:
+        - Return Format:
+            - The return statement must include:return success_or_not, final_obs
+        - Unchanged Values:
+            - success_or_not: This boolean value should remain unchanged throughout the function execution.
+            - final_obs: The observation data must also remain unaltered within the function.
+        - Implementation Logic:
+            - The function may perform additional computations or generate feedback based on the failure reasoning, but these operations must not modify success_or_not or final_obs.
+
+---
+
+Example Input:
+
+Task:
+"In the scene, you will find the following objects: nobody_cube, love_cube, sky_cube. 
+Your task is to pick up the nobody_cube and place it onto the love_cube." 
+
+
+Failure Reason:
+High Level:
+    "You picked up the love_cube and placed it onto the sky_cube."
+Low Level:
+    "The robot failed to place the object due to the +z offset."
+
+Previous Failure Reasoning:
+[]
+
+Previous LLM Feedback:
+[]
+
+
+Previous ChatGPT Feedback:
+"None"
+
+---
+
+Expected Output:
+```
+def gen_pan(self,):
+    high_level_policy = ...
+    low_level_policy = ...
+    new_pickup_object_name = ...
+    new_placement_object_name = ...
+    xyz_grasp_offset = ...
+    xyz_placement_offset = ...
+    self.llm_feedback = ...
+    rpy_grasp_offset = ...
+
+    success_or_not = False
+    if high_level_policy:
+        success_or_not,final_obs = self.high_level_plan(new_pickup_object_name,
+                                                new_placement_object_name,
+                                                last_obs)
+    if low_level_policy:
+        success_or_not, final_obs = self.low_level_plan(
+            last_obs, xyz_placement_offset,rpy_grasp_offset)
+       
+
+    return success_or_not, final_obs
+```
+rpy_grasp_offset: Represents the rotational offset applied to the grasp pose around the yaw axis. Ensure that the range of `rpy_grasp_offset` values remains between 0.7 and 1.6 or between -1.6 and 0.7 for optimal performance. If any dimension (roll, pitch, or yaw) does not require an offset, set that dimension to zero while applying the offset only to the required dimension.
+
+xyz_grasp_offset: Represents the positional (x, y, z) offset applied to the grasp pose. Ensure that the range of `xyz_grasp_offset` values remains between 0.0 and 0.04 or between -0.04 and 0.0 for optimal performance. If any dimension (x, y, or z) does not require an offset, set that dimension to zero while applying the offset only to the required dimension.

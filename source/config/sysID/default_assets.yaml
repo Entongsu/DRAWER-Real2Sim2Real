@@ -1,0 +1,29 @@
+AssstObject:
+  block1:
+    path: "source/assets/shape/cube/cube_static.usd"
+    scale: [0.1, 8.0, 4.0]
+    pos: [0.0, -3.0, -2]
+    rot:
+      axis: [2]
+      angles: [1.57]
+  block2:
+    path: "source/assets/shape/cube/cube_static.usd"
+    scale: [0.1, 8.0, 4.0]
+    pos: [0.0, 3.0, -2]
+    rot:
+      axis: [2]
+      angles: [-1.57]
+  block3:
+    path: "source/assets/shape/cube/cube_static.usd"
+    scale: [0.1, 6.0, 4.0]
+    pos: [-4, 0.0, -2]
+    rot:
+      axis: [2]
+      angles: [0]
+  block4:
+    path: "source/assets/shape/cube/cube_static.usd"
+    scale: [0.1, 6.0, 4.0]
+    pos: [4, 0.0, -2]
+    rot:
+      axis: [2]
+      angles: [0]

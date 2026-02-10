@@ -1,0 +1,207 @@
+params:
+  Task:
+    init_ee_pose: [0.40, 0.0, 0.25, 0.0, 1.0, 0.0, 0.0]
+    action_range: [3, 10]
+    reset_horizon: 20
+    horizon: 200
+    target_lift_object_pos: [0.40, 0.0, 0.30]
+    lift_height: 0.20
+    target_object_name : "green_cube"
+
+    gripper_length_offset: [0.0, 0.0, -0.157, 1.0, 0.0, 0.0, 0.0]
+    randomize_camera_pose: False
+    randomize_camera_pose_range: [0.04, 0.1]
+    curobo_planner_length: 31
+    success_pick_threhold: 2
+    robot_pose_random_range:
+      pose_range:
+        x: [-0.0, 0.0] #[-0.075, 0.075] #[-0.10, 0.10]
+        y: [-0.0, -0.0] #[-0.10, 0.02]
+        z: [0.0, 0.0] #[-0.02, 0.13]
+        yaw: [0.0, 0.0]
+    ee_random_range:
+      position_range: [0.0, 0.0]
+    sample_object_setting:
+      min_separation: 0.15
+      pose_range:
+        x: [0.4, 0.6] #[-0.075, 0.075] #[-0.10, 0.10]
+        y: [-0.10, 0.10] #[-0.10, 0.02]
+        z: [0.05, 0.05] #[-0.02, 0.13]
+        yaw: [-1.0, 1.0]
+    target_placement_object: null #"mug"
+
+    grasper:
+      isaac2m2t2_offset: [0.0, 0.0, 0.0, 0.707, 0.0, 0.0, -0.707]
+      gripper_offset: [0.0000, 0.0000, -0.10, 1.0, 0.0, 0.0, 0.0]
+      m2t2_gripper_offset: [0.0000, 0.0000, 0.02, 1.0, 0.0, 0.0, 0.0]
+      init_ee_pos: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0.0, 1.0]
+      grasp_angle_range: [-3.14, -3.0]
+      planner_tolerance_iter: 100
+      lift_threshold: 0.05
+      approach_horizon: 20
+      close_horizon: 7
+      lift_horizon: 10
+      lift_speed: [-0.0, 0.0, 0.025]
+    placement:
+      placement_offset: [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      open_gripper_horizon: 10
+      refine_horizon: 4
+      init_ee_pos: [0.40, 0.0, 0.45, 0.0, 1.0, 0.0, 0.0, 1.0]
+
+  RL_Train:
+    rigid_object_names: ["green_cube"]
+
+  ArticulationObject:
+  DeformableObject:
+
+  RigidObject:
+    # mug:
+    #   path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.4, -0.0, 0.0]
+    #   rot:
+    #     axis: [0]
+    #     angles: [-1.57]
+
+    green_cube:
+      path: "source/assets/blocks/yellow_block.usd"
+      # path: "cube.usd"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.4, -0.0, 0.0]
+      rot:
+        axis: [1]
+        angles: [3.14]
+      pose_range:
+        x: [-0.05, 0.15]
+        y: [-0.10, 0.10] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-3.0, 3.0]
+
+    # yellow_cube:
+    #   path: "source/assets/blocks/yellow_block.usd"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.4, 0.15, 0.0]
+    #   rot:
+    #     axis: [0]
+    #     angles: [0]
+
+    # blue_cube:
+    #   path: "source/assets/blocks/blue_block.usd"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.4, 0.15, 0.0]
+    #   rot:
+    #     axis: [0]
+    #     angles: [0]
+    panda_hand:
+      spawn: False
+      path: Robot/panda_hand
+    panda_leftfinger:
+      spawn: False
+      path: Robot/panda_leftfinger
+    panda_rightfinger:
+      spawn: False
+      path: Robot/panda_rightfinger
+
+  AssstObject:
+    # block1:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, -3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [1.57]
+    # block2:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, 3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [-1.57]
+    # block3:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [-4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+    # block4:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+
+  Camera:
+    initial: False
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_segmentation_fast"
+    whole_pc: False
+    seg_pc: False
+    whole_rgb: True
+    seg_rgb: False
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      # camera_00:
+      #   camera_type: "tiled_camera"
+      #   height: 480
+      #   width: 640
+      #   data_types:
+      #     ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+      #   update_period: 0.03
+      #   eyes: [-0.20, -1.0, 0.7] #[0.60, -0.8, 1.2]
+      #   target: [0.20, -0.0, 0.5] #[0.55, -0.51924, 0.22789]
+
+      camera_01:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        data_types: ["rgb"] # ["rgb", "distance_to_image_plane", "instance_segmentation_fast"]
+        update_period: 0.03
+        eyes: null #[-0.2, 1.0, 0.8]
+        target: null #[0.40, -0.0, 0.5]
+        translate: [1.64, 0.04, 0.75]
+        euler: [66.0, 0.0, 90]
+      camera_02:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        data_types: ["rgb"]
+        update_period: 0.03
+        eyes: null #[-0.2, 1.0, 0.8]
+        target: null #[0.40, -0.0, 0.5]
+        translate: [0.50, 1.0, 1.0]
+        euler: [51, 0.0, -179]
+
+      camera_03:
+        camera_type: "camera"
+        height: 480
+        width: 640
+        data_types: ["rgb"]
+        update_period: 0.03
+        eyes: null #[-0.2, 1.0, 0.8]
+        target: null #[0.40, -0.0, 0.5]
+        translate: [0.48, -1.42, 1.15]
+        euler: [55, 0.0, -3]

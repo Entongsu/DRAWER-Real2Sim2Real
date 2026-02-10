@@ -1,0 +1,45 @@
+params:
+  DeformableObject:
+    deform_object:
+      env_setting:
+        simulation_hexahedral_resolution: 32
+        attach_robot:
+          DeformableVertexOverlapOffset: -0.07
+        camera_obs:
+          filter_xy_radius: 0.2
+          filter_z_threshold: 0.05
+          segmentation_id: 3
+        filter_pair_path:
+          - /World/envs/env_.*/gripper
+          - /World/envs/env_.*/deform_object/cloth_base/Mesh/Mesh
+        floating_gripper:
+          gripper_offset:
+            - 0.0
+            - 0.0
+            - 0.07
+          gripper_offset_xyz:
+            - 0.5
+            - 0.0
+            - 0.0
+        path: source/assets/Plush/usd/cloth04/cloth_deform.usd
+        pos:
+          - 0.6
+          - 0.20
+          - 0.01
+        pose_range: null
+        rot:
+          angles:
+            - 0
+          axis:
+            - 2
+        scale:
+          - 1.0
+          - 1.0
+          - 1.0
+        velocity_range: null
+
+        physical_params:
+          params_values:
+            elasticity_damping: [[0.0, 0.2]]
+          fix_params:
+            youngs_modulus: 500000000

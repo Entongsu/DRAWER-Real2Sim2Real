@@ -1,0 +1,35 @@
+RigidObjectTemplate:
+  rigid_object:
+    name: "block"
+    path: "source/assets/robot/franka/panda_hand_big.usd"
+    scale: [1, 1, 1]
+    pos: [0.5, 0.0, .0]
+    rot:
+      axis: [0]
+      angles: [-1.57]
+
+RigidObject:
+  gripper_0:
+    attachment_type: "rigid"
+    init: True
+    path: "source/assets/robot/franka/panda_hand_big.usd"
+    scale: [0.01, 0.01, 0.01]
+    pos: [0.0, 0.0, 0.3]
+    rot:
+      axis: [0]
+      angles: [0]
+    disable_gravity: True
+    motion: True
+    relative_pos: False
+
+  # gripper_1:
+  #   init: True
+  #   path: "source/assets/robot/franka/panda_hand_big.usd"
+  #   scale: [0.01, 0.01, 0.01]
+  #   pos: [0.3, 0.0, .1]
+  #   rot:
+  #     axis: [0]
+  #     angles: [0]
+  #   disable_gravity: True
+  #   motion: True
+  #   relative_pos: False

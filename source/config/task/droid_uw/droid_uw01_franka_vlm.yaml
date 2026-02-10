@@ -1,0 +1,261 @@
+params:
+  Task:
+    robot_type: franka
+    splat_list: ["robot", "kitchen"]
+    robot_splatting_path: source/assets/kitchen/usd/bridge_kitchen_uw/robot
+    inference_or_not: True
+    init_ee_pose: [0.50, 0.0, 0.35, 0.0, 1.0, 0.0, 0., 1.0]
+    target_lift_object_pos: [0.35, 0.05, 0.25]
+    render_camera: True
+    reset_object_names: ["yellow_cube","mug"]
+    horizon: 180
+    reset_horizon: 20
+    lift_height: 0.15
+    action_range: [1.0, 3.14]
+    target_object: yellow_cube
+    target_mesh_name: "Cube"
+    target_object_type: "cube"
+
+    rigid_object_names:
+      [
+        "panda_leftfinger",
+        "panda_rightfinger",
+        "panda_link0",
+        "panda_link1",
+        "panda_link2",
+        "panda_link3",
+        "panda_link4",
+        "panda_link5",
+        "panda_link6",
+        "panda_link7",
+        "panda_hand",
+      ]
+
+    grasper:
+      isaac2m2t2_offset: [0.0, 0.0, 0.0, 0.707, 0.0, 0.0, -0.707]
+      gripper_offset: [-0.0, -0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      m2t2_gripper_offset: [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+      init_ee_pos: [0.50, 0.0, 0.35, 0.0, 1.0, 0.0, 0., 1.0]
+      grasp_angle_range: [-3.14, -3.0]
+      planner_tolerance_iter: 100
+      lift_threshold: 0.05
+      approach_horizon: 5
+      close_horizon: 5
+      lift_horizon: 15
+      lift_speed: [-0.0, 0.0, 0.01]
+
+    placement:
+      placement_offset: [0.15, 0.0, 0.20, 0.0, 1.0, 0.0, 0.0]
+      open_gripper_horizon: 20
+      placement_height: [0.25, 0.30]
+      placement_object: mug
+      # placement_region:
+      #   min: [0.45, 0.25, 0.35]
+      #   max: [0.55, 0.35, 0.45]
+      #   bound_region: [0.40, 0.10, -0.10]
+
+  RL_Train:
+    initial: True
+    rigid_object_names: ["yellow_cube"]
+
+  ArticulationObject:
+  robot:
+    gs_path: "source/assets/robot/droid_uw_robot"
+    type: panda
+
+  RigidObject:
+    # bottle:
+    #   # kinematic_enabled: True
+    #   path: "source/assets/gs_objects/bottle/bottle.usd"
+    #   gs_path: "source/assets/gs_objects/bottle/splat.ply"
+    #   transformation_txt: "source/assets/gs_objects/bottle/transform.txt"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.33, -0.08, 0.10]
+    #   rot:
+    #     axis: [0]
+    #     angles: [-0.0]
+    #   pose_range:
+    #     x: [-0.04, 0.04]
+    #     y: [-0.04, 0.04] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+    #     yaw: [-1.5, 1.5]
+
+    mug:
+      path: "source/assets/ycb/Axis_Aligned/025_mug.usd"
+      scale: [0.01, 0.01, 0.01]
+      pos: [0.45, 0.05, 0.10]
+      rot:
+        axis: [0]
+        angles: [-1.57]
+      pose_range:
+        x: [-0.0, 0.1]
+        y: [-0.0, 0.15] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-1.5, 1.5]
+
+    # plate:
+    #   path: "source/assets/gs_objects/plate/transformed_mesh.usd"
+    #   scale: [1.0, 1.0, 1.0]
+    #   pos: [0.4, 0.05, 0.0]
+    #   rot:
+    #     axis: [0]
+    #     angles: [0]
+    #   pose_range:
+    #     x: [-0.0, 0.10]
+    #     y: [0.0, 0.10] #[0.0, 0.20]
+    #     z: [0.0, 0.0]
+
+    yellow_cube:
+      path: "source/assets/blocks/yellow_block.usd"
+      scale: [1.0, 1.0, 1.0]
+      pos: [0.45, 0.0, 0.05]
+      rot:
+        axis: [0]
+        angles: [0]
+      pose_range:
+        x: [-0.05, 0.10]
+        y: [-0.15, 0.0] #[0.0, 0.20]
+        z: [0.0, 0.0]
+        yaw: [-1.5, 1.5]
+
+    
+    panda_link0:
+      spawn: False
+      path: Robot/panda_link0
+    panda_link1:
+      spawn: False
+      path: Robot/panda_link1
+    panda_link2:
+      spawn: False
+      path: Robot/panda_link2
+    panda_link3:
+      spawn: False
+      path: Robot/panda_link3
+    panda_link4:
+      spawn: False
+      path: Robot/panda_link4
+    panda_link5:
+      spawn: False
+      path: Robot/panda_link5
+    panda_link6:
+      spawn: False
+      path: Robot/panda_link6
+    panda_link7:
+      spawn: False
+      path: Robot/panda_link7
+    panda_hand:
+      spawn: False
+      path:  Robot/panda_hand
+
+    panda_leftfinger:
+      spawn: False
+      path:  Robot/panda_leftfinger
+
+    panda_rightfinger:
+      spawn: False
+      path: Robot/panda_rightfinger
+
+  AssstObject:
+    # block1:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, -3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [1.57]
+    # block2:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 8.0, 4.0]
+    #   pos: [0.0, 3.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [-1.57]
+    # block3:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [-4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+    # block4:
+    #   path: "source/assets/shape/cube/cube_static.usd"
+    #   scale: [0.1, 6.0, 4.0]
+    #   pos: [4, 0.0, -2]
+    #   rot:
+    #     axis: [2]
+    #     angles: [0]
+
+
+  GS_Camera:
+    initial: False
+    FoVx: 1.01 #1.01
+    FoVy: 0.8
+    resolution: [640, 480]
+    zfar: 100.0
+    znear: 0.01
+    transform_camera2world: True
+
+    cameras:
+      camera_03:
+        translate: [-0.01, 0.41, 0.76]
+        euler: [52, 0, -130]
+
+  Camera:
+    initial: True
+    random_pose: False
+    camera_json: null #"source/config/camera/automatic_articulation/kitchen02_cabinet.json"
+
+    max_length: 0
+    segmentation_name: "instance_id_segmentation_fast"
+    whole_pc: False
+    seg_pc: False
+    whole_rgb: True
+    seg_rgb: True
+    whole_depth: False
+    bbox: [-2, -2.0, -0.0, 2.0, 2.0, 1.0] # [-0.20, -0.87, 0.0, 0.60, -0.5, 0.4]
+    align_robot_base: True
+
+    pointcloud_setting:
+      use_segmentation: True
+      segmentation_point_cloud_id: 3
+      num_sampled_points: 2048
+      segmentation_point_cloud: True
+      colorize_point_cloud: True
+      num_downsampled_points: 2048
+
+    random_pose_setting:
+      origin: [0.5, -0.0, 0.0]
+      radius_range: [0.8, 1.2]
+      base_rot:
+        axis: [1, 0]
+        angles: [-1.57, -1.57]
+      z_min: 0.7
+
+    cameras:
+      camera_00:
+        camera_type: "camera"
+        height: 256
+        width: 256
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+
+        translate: [1.2, 0.0, 0.6628355876674373]
+        euler: [76.33089, 1.4804899e-13, 95.18056]
+
+      camera_01:
+        camera_type: "camera"
+        height: 256
+        width: 256
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+        translate: [0.20391743584227962, -0.9, 0.6023670448447237]
+        euler: [77.75497, 1.5277216e-13, 3.6264179]
+
+      camera_03:
+        camera_type: "camera"
+        height: 256
+        width: 256
+        data_types: ["rgb", "instance_id_segmentation_fast"]
+        update_period: 0.03
+        translate: [0.3167297757675026, 0.9, 0.7726992573578053]
+        euler: [63.932972, -8.278504e-14, -177.40974]
